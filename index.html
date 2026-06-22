@@ -2,15 +2,13 @@ from flask import Flask, render_template_string
 
 app = Flask(__name__)
 
-# O HTML original vai dentro de uma string
-html_code = """
-<!DOCTYPE html>
+# Colocamos seu HTML dentro de uma string Python
+html_code = """<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <title>Tradutor Binário</title>
   <style>
-    /* --- seu CSS original --- */
     body {
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #1e1e2f, #2a2a40);
@@ -19,18 +17,76 @@ html_code = """
       margin: 0;
       padding: 20px;
     }
-    h1 { color: #00ffcc; text-shadow: 0 0 10px #00ffcc; }
-    h2 { margin-top: 30px; color: #ffcc00; text-shadow: 0 0 5px #ffcc00; }
-    select, input, button { padding: 10px; margin: 10px; border-radius: 8px; border: none; font-size: 16px; }
-    input, select { background: #333; color: #fff; }
-    button { background: #00ffcc; color: #000; cursor: pointer; transition: transform 0.2s, background 0.3s; }
-    button:hover { transform: scale(1.1); background: #00ffaa; }
-    .bits { display: flex; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
-    .lampada { width: 40px; height: 60px; margin: 8px; border-radius: 20px 20px 10px 10px; background: #222; position: relative; box-shadow: inset 0 0 10px #000; transition: background 0.3s, box-shadow 0.3s; }
-    .lampada::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 20px; height: 10px; background: #555; border-radius: 3px; }
-    .on { background: #ffeb3b; box-shadow: 0 0 20px #ffeb3b, 0 0 40px #ffeb3b; }
-    p { font-size: 18px; margin-top: 10px; }
-    #infoBits { margin-top: 10px; font-size: 16px; color: #00ffaa; }
+    h1 {
+      color: #00ffcc;
+      text-shadow: 0 0 10px #00ffcc;
+    }
+    h2 {
+      margin-top: 30px;
+      color: #ffcc00;
+      text-shadow: 0 0 5px #ffcc00;
+    }
+    select, input, button {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+    input, select {
+      background: #333;
+      color: #fff;
+    }
+    button {
+      background: #00ffcc;
+      color: #000;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.3s;
+    }
+    button:hover {
+      transform: scale(1.1);
+      background: #00ffaa;
+    }
+    .bits {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .lampada {
+      width: 40px;
+      height: 60px;
+      margin: 8px;
+      border-radius: 20px 20px 10px 10px;
+      background: #222;
+      position: relative;
+      box-shadow: inset 0 0 10px #000;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    .lampada::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 10px;
+      background: #555;
+      border-radius: 3px;
+    }
+    .on {
+      background: #ffeb3b;
+      box-shadow: 0 0 20px #ffeb3b, 0 0 40px #ffeb3b;
+    }
+    p {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+    #infoBits {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #00ffaa;
+    }
   </style>
 </head>
 <body>
@@ -58,7 +114,6 @@ html_code = """
   <p id="numeroResultado"></p>
   
   <script>
-    /* --- seu JavaScript original --- */
     function atualizarInfoBits() {
       const bits = parseInt(document.getElementById("bits").value);
       const max = Math.pow(2, bits) - 1;
@@ -117,12 +172,11 @@ html_code = """
     atualizarInfoBits();
   </script>
 </body>
-</html>
-"""
+</html>"""
 
 @app.route("/")
 def index():
     return render_template_string(html_code)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=8000, debug=True)
